@@ -13,6 +13,15 @@ public class SystemUser implements CsvRepresentational {
 	private String email;
 	private boolean active;
 
+	private static Long idGenerator = 1L;
+
+	public SystemUser(String name, String email) {
+		super();
+		this.id = idGenerator++;
+		this.name = name;
+		this.email = email;
+	}
+
 	@Override
 	public String titleRow() {
 		String[] data = new String[]{"Identificator", "User's name",
@@ -28,6 +37,12 @@ public class SystemUser implements CsvRepresentational {
 
 		return Arrays.stream(data)
 				.collect(Collectors.joining(CsvConfig.SEPARATOR));
+	}
+
+	@Override
+	public String toString() {
+		return "SystemUser [name=" + name + ", email=" + email + ", active="
+				+ active + "]";
 	}
 
 }

@@ -9,9 +9,15 @@ import java.util.stream.Collectors;
 
 public class SimpleCsvFileGenerator implements CsvFileGenerator {
 
+	private final String filePath;
+
+	public SimpleCsvFileGenerator(String filePath) {
+		super();
+		this.filePath = filePath;
+	}
+
 	@Override
-	public File generate(String filePath,
-			List<? extends CsvRepresentational> entities) {
+	public File generate(List<? extends CsvRepresentational> entities) {
 
 		if (entities == null || entities.isEmpty()) {
 			throw new CsvGenerationException("List empty!");
@@ -34,8 +40,7 @@ public class SimpleCsvFileGenerator implements CsvFileGenerator {
 		content.add(entities.get(0).titleRow());
 		content.addAll(entities.stream().map(CsvRepresentational::toCSVRow)
 				.collect(Collectors.toList()));
-		return content.stream()
-				.collect(Collectors.joining(CsvConfig.SEPARATOR));
+		return content.stream().collect(Collectors.joining("\n"));
 
 	}
 

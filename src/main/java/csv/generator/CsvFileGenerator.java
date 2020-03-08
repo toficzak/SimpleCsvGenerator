@@ -5,6 +5,5 @@ import java.util.List;
 
 public interface CsvFileGenerator {
 
-	File generate(String filePath,
-			List<? extends CsvRepresentational> entities);
+	File generate(List<? extends CsvRepresentational> entities);
 }
